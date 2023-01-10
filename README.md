@@ -1,1 +1,1 @@
-# django_lms_1
+# django_lms
