@@ -15,7 +15,7 @@ def format_list_students(students):
              '<tbody>'
     for st in students:
         string += f'<tr>' \
-                  f'<td>{st.first_name}</td>' \
+                  f'<td>{st.first_name_1}</td>' \
                   f'<td>{st.last_name}</td>' \
                   f'<td>{st.email}</td>' \
                   f'<td>{st.birthday}</td>' \

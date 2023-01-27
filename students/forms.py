@@ -7,7 +7,7 @@ class CreateStudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = [
-            'first_name',
+            'first_name_1',
             'last_name',
             'birthday',
             'email',
@@ -29,7 +29,7 @@ class UpdateStudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = [
-            'first_name',
+            'first_name_1',
             'last_name',
             'birthday',
             'city',
