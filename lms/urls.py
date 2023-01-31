@@ -23,3 +23,5 @@ urlpatterns = [
 # https://www.digitalocean.com/
 
 # http://127.0.0.1:45632      /students/update/6/
+
+# http://127.0.0.1:45632/students/students/update/6/

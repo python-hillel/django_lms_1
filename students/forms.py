@@ -18,8 +18,8 @@ class CreateStudentForm(forms.ModelForm):
             'birthday': forms.DateInput(attrs={'type': 'date'})
         }
 
-    def clean_first_name(self):
-        value = self.cleaned_data.get('first_name')
+    def clean_first_name_1(self):
+        value = self.cleaned_data.get('first_name_1')
         return value.capitalize()
 
 

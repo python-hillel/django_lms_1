@@ -22,7 +22,7 @@ from .models import Student
 
 @use_args(
     {
-        'first_name': Str(required=False),
+        'first_name_1': Str(required=False),
         'last_name': Str(required=False),
     },
     location='query',
@@ -36,9 +36,9 @@ def get_students(request, args):
     # if 'last_name' in args:
     #     students = students.filter(last_name=args['last_name'])
 
-    if len(args) and (args.get('first_name') or args.get('last_name')):
+    if len(args) and (args.get('first_name_1') or args.get('last_name')):
         students = students.filter(
-            Q(first_name=args.get('first_name', '')) | Q(last_name=args.get('last_name', ''))
+            Q(first_name_1=args.get('first_name_1', '')) | Q(last_name=args.get('last_name', ''))
         )
 
     # form = '''
