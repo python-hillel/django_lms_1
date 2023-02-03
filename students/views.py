@@ -9,7 +9,7 @@ from webargs.fields import Str
 from webargs.djangoparser import use_args
 from django.db.models import Q
 
-from .forms import CreateStudentForm, UpdateStudentForm
+from .forms import CreateStudentForm, UpdateStudentForm, StudentFilterForm
 from .models import Student
 # from .utils import format_list_students
 
@@ -20,44 +20,32 @@ from .models import Student
 
 # CRUD - Create Read Update Delete
 
-@use_args(
-    {
-        'first_name_1': Str(required=False),
-        'last_name': Str(required=False),
-    },
-    location='query',
-)
-def get_students(request, args):
+# @use_args(
+#     {
+#         'first_name_1': Str(required=False),
+#         'last_name': Str(required=False),
+#     },
+#     location='query',
+# )
+# def get_students(request, args):
+def get_students(request):
     students = Student.objects.all().order_by('birthday')
 
-    # if 'first_name' in args:
-    #     students = students.filter(first_name=args['first_name'])
-    #
-    # if 'last_name' in args:
-    #     students = students.filter(last_name=args['last_name'])
+    filter_form = StudentFilterForm(data=request.GET, queryset=students)
 
-    if len(args) and (args.get('first_name_1') or args.get('last_name')):
-        students = students.filter(
-            Q(first_name_1=args.get('first_name_1', '')) | Q(last_name=args.get('last_name', ''))
-        )
+    # if len(args) and (args.get('first_name_1') or args.get('last_name')):
+    #     students = students.filter(
+    #         Q(first_name_1=args.get('first_name_1', '')) | Q(last_name=args.get('last_name', ''))
+    #     )
 
-    # form = '''
-    #     <form method="get">
-    #       <label for="fname">First name:</label>
-    #       <input type="text" id="fname" name="first_name"><br><br>
-    #       <label for="lname">Last name:</label>
-    #       <input type="text" id="lname" name="last_name"><br><br>
-    #       <input type="submit" value="Submit"><br>
-    #     </form>
-    # '''
-
-    # string = form + format_list_students(students)
-    # response = HttpResponse(string)
-    # return response
     return render(
         request=request,
         template_name='students/list.html',
-        context={'title': 'List of Students', 'students': students}
+        context={
+            # 'title': 'List of Students',
+            # 'students': students,
+            'filter_form': filter_form,
+        }
     )
 
 
@@ -75,7 +63,7 @@ def create_student_view(request):
         form = CreateStudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('list'))
+            return HttpResponseRedirect(reverse('students:list'))
 
     return render(request, 'students/create.html', {'form': form})
 
@@ -90,7 +78,7 @@ def update_student(request, pk):
         form = UpdateStudentForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('list'))
+            return HttpResponseRedirect(reverse('students:list'))
 
     return render(request, 'students/update.html', {'form': form})
 
@@ -101,6 +89,6 @@ def delete_student(request, pk):
 
     if request.method == 'POST':
         st.delete()
-        return HttpResponseRedirect(reverse('list'))
+        return HttpResponseRedirect(reverse('students:list'))
 
     return render(request, 'students/delete.html', {'student': st})
