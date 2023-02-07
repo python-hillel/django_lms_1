@@ -15,3 +15,8 @@ class Group(models.Model):
 
     def __str__(self):
         return f'Group name: {self.name}'
+
+    @classmethod
+    def generate_fake_data(cls):
+        for name in 'Python', 'Java', 'HTML+CSS', 'C#', 'C/C++', 'DevOPS':
+            cls.objects.create(name=name)

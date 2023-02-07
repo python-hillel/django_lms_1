@@ -3,7 +3,7 @@
 {% load crispy_forms_filters %}
 
 {% block title %}
-Update student "{{ form.first_name_1.value }}"
+Create new group
 {% endblock %}
 
 {% block content %}
@@ -14,8 +14,8 @@ Update student "{{ form.first_name_1.value }}"
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="text-center">
-                    <input class="btn btn-outline-primary" type="submit" value="Update">
-                    <a class="btn btn-outline-primary" href="{% url 'students:list' %}">Back to list</a>
+                    <input class="btn btn-outline-primary" type="submit" value="Create">
+                    <a class="btn btn-outline-primary" href="{% url 'groups:list' %}">Back to list</a>
                 </div>
             </form>
         </div>

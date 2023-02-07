@@ -38,12 +38,14 @@ class Student(models.Model):
     @classmethod
     def generate_fake_data(cls, cnt):
         f = Faker()
+        groups = Group.objects.all()
         for _ in range(cnt):
             s = cls()       # s = Student()
             s.first_name_1 = f.first_name()
             s.last_name = f.last_name()
             s.email = f'{s.first_name_1}.{s.last_name}@{f.random.choice(VALID_DOMAINS)}'           # name.last@domain
             s.birthday = f.date_between(start_date='-65y', end_date='-18y')
+            s.group = f.random.choice(groups)
             # s.age = f.random_int(min=18, max=65)
             # f.random.choice()             DjDT
             s.save()

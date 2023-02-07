@@ -8,8 +8,10 @@ from core.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
     path('', index, name='home'),
     path('students/', include('students.urls')),
+    path('groups/', include('groups.urls')),
 
     # path('test/route/param/', view_without_param),          # test/route/param/
     # path(r'test/route/<str:value>/', view_with_param),       # test/route/df;lkjhrlkjgf's/

@@ -29,7 +29,7 @@ from .models import Student
 # )
 # def get_students(request, args):
 def get_students(request):
-    students = Student.objects.all().order_by('birthday')
+    students = Student.objects.all().order_by('birthday').select_related('group')
 
     filter_form = StudentFilterForm(data=request.GET, queryset=students)
 
