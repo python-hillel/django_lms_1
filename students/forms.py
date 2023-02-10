@@ -8,7 +8,7 @@ class CreateStudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = [
-            'first_name_1',
+            'first_name',
             'last_name',
             'birthday',
             'email',
@@ -19,8 +19,8 @@ class CreateStudentForm(forms.ModelForm):
             'birthday': forms.DateInput(attrs={'type': 'date'})
         }
 
-    def clean_first_name_1(self):
-        value = self.cleaned_data.get('first_name_1')
+    def clean_first_name(self):
+        value = self.cleaned_data.get('first_name')
         return value.capitalize()
 
 
@@ -30,7 +30,7 @@ class UpdateStudentForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = [
-            'first_name_1',
+            'first_name',
             'last_name',
             'birthday',
             'city',
@@ -45,6 +45,6 @@ class StudentFilterForm(FilterSet):
     class Meta:
         model = Student
         fields = {
-            'first_name_1': ['exact', 'icontains'],           # first_name_1 = 'Alex',   first_name_1 ILIKE '%abc%'
+            'first_name': ['exact', 'icontains'],           # first_name_1 = 'Alex',   first_name_1 ILIKE '%abc%'
             'last_name': ['exact', 'startswith']              # last_name LIKE 'ABC%'
         }       # AND (OR)

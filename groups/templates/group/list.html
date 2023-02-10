@@ -13,6 +13,7 @@ List of groups
                     <th>Group name</th>
                     <th>Start date</th>
                     <th>End date</th>
+                    <th>Headman</th>
                     <th><i class="bi bi-pencil-fill"></i></th>
                     <th><i class="bi bi-trash3-fill"></i></th>
                 </tr>
@@ -23,7 +24,8 @@ List of groups
                     <td>{{ forloop.counter }}</td>
                     <td>{{ group.name }}</td>
                     <td>{{ group.start_date }}</td>
-                    <td>{{ group.end_date }}</td>
+                    <td>{% if group.end_date %}{{ group.end_date }}{% endif %}</td>
+                    <td>{% if group.headman %}{{ group.headman.last_name }} {{ group.headman.first_name_1 }}{% endif %}</td>
                     <td class="text-center"><a class="btn btn-outline-primary btn-sm"
                                                href="{% url 'groups:update' group.pk %}">Edit</a></td>
                     <td class="text-center"><a class="btn btn-outline-danger btn-sm"

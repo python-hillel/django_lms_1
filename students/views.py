@@ -3,12 +3,14 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.middleware.csrf import get_token
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import UpdateView
 # from django.views.decorators.csrf import csrf_exempt
 from webargs.fields import Str
 from webargs.djangoparser import use_args
 from django.db.models import Q
 
+from core.views import CustomUpdateBaseView
 from .forms import CreateStudentForm, UpdateStudentForm, StudentFilterForm
 from .models import Student
 # from .utils import format_list_students
@@ -69,18 +71,30 @@ def create_student_view(request):
 
 
 def update_student(request, pk):
-    # student = Student.objects.get(pk=pk)
     student = get_object_or_404(Student, pk=pk)
 
-    if request.method == 'GET':
-        form = UpdateStudentForm(instance=student)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         form = UpdateStudentForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('students:list'))
 
+    form = UpdateStudentForm(instance=student)
     return render(request, 'students/update.html', {'form': form})
+
+
+class CustomUpdateStudentView(CustomUpdateBaseView):
+    model = Student
+    form_class = UpdateStudentForm
+    success_url = 'students:list'
+    template_name = 'students/update.html'
+
+
+class UpdateStudentView(UpdateView):
+    model = Student
+    form_class = UpdateStudentForm
+    success_url = reverse_lazy('students:list')
+    template_name = 'students/update.html'
 
 
 def delete_student(request, pk):

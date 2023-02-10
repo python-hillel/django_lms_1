@@ -2,13 +2,19 @@ import datetime
 
 from django.db import models
 
+from core.models import BaseModel
+from teachers.models import Teacher
 
-class Group(models.Model):
+
+class Group(BaseModel):
     name = models.CharField(max_length=50)
     start_date = models.DateField(default=datetime.date.today)
     end_date = models.DateField(null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    headman = models.OneToOneField(
+        'students.Student', on_delete=models.SET_NULL, null=True, blank=True, related_name='headman_group'
+    )
+    teachers = models.ManyToManyField(to=Teacher, blank=True, related_name='groups')
 
     class Meta:
         db_table = 'groups'
@@ -18,5 +24,5 @@ class Group(models.Model):
 
     @classmethod
     def generate_fake_data(cls):
-        for name in 'Python', 'Java', 'HTML+CSS', 'C#', 'C/C++', 'DevOPS':
+        for name in 'Python', 'Java', 'HTML+CSS', 'C#', 'C/C++', 'DevOPS', 'PM', 'QA':
             cls.objects.create(name=name)

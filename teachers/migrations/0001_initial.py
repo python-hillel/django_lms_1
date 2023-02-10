@@ -3,7 +3,6 @@
 import core.validators
 import datetime
 from django.db import migrations, models
-import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -11,12 +10,11 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('groups', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Student',
+            name='Teacher',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True)),
@@ -26,10 +24,10 @@ class Migration(migrations.Migration):
                 ('birthday', models.DateField(blank=True, default=datetime.date.today)),
                 ('city', models.CharField(blank=True, max_length=25, null=True)),
                 ('email', models.EmailField(max_length=254, validators=[core.validators.ValidateEmailDomain('gmail.com', 'yahoo.com', 'test.com')])),
-                ('group', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='students', to='groups.group')),
+                ('salary', models.PositiveIntegerField(default=10000)),
             ],
             options={
-                'db_table': 'students',
+                'db_table': 'teachers',
             },
         ),
     ]
