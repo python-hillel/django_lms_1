@@ -19,13 +19,13 @@ List of groups
                 </tr>
             <thead>
             <tbody>
-            {% for group in groups %}
+            {% for group in object_list %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ group.name }}</td>
                     <td>{{ group.start_date }}</td>
                     <td>{% if group.end_date %}{{ group.end_date }}{% endif %}</td>
-                    <td>{% if group.headman %}{{ group.headman.last_name }} {{ group.headman.first_name_1 }}{% endif %}</td>
+                    <td>{% if group.headman %}{{ group.headman.last_name }} {{ group.headman.first_name }}{% endif %}</td>
                     <td class="text-center"><a class="btn btn-outline-primary btn-sm"
                                                href="{% url 'groups:update' group.pk %}">Edit</a></td>
                     <td class="text-center"><a class="btn btn-outline-danger btn-sm"

@@ -12,6 +12,7 @@ urlpatterns = [
     path('', index, name='home'),
     path('students/', include('students.urls')),
     path('groups/', include('groups.urls')),
+    path('accounts/', include('accounts.urls')),
 
     # path('test/route/param/', view_without_param),          # test/route/param/
     # path(r'test/route/<str:value>/', view_with_param),       # test/route/df;lkjhrlkjgf's/
