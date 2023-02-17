@@ -148,5 +148,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
  ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('students:list')
-LOGOUT_REDIRECT_URL = reverse_lazy('home')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
+# LOGOUT_REDIRECT_URL = reverse_lazy('home')
+
+EMAIL_PORT = 1025
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
