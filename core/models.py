@@ -39,7 +39,7 @@ class PersonModel(BaseModel):
             first_name=first_name,
             last_name=last_name,
             birthday=f.date_between(start_date='-65y', end_date='-18y'),
-            email=f'{first_name} {last_name}@{f.random.choice(cls.domain)}',
+            email=f'{first_name}.{last_name}@{f.random.choice(cls.domain)}',
             city=f.city()
         )
         obj.save()
