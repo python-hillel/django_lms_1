@@ -59,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'core.middleware.DurationRequestProcessMiddleware',
+    'core.middleware.MyMiddleware',
 ]
 
 ROOT_URLCONF = 'lms.urls'
@@ -148,7 +150,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
  ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGIN_REDIRECT_URL = reverse_lazy('students:list')
 # LOGOUT_REDIRECT_URL = reverse_lazy('home')
 
 EMAIL_PORT = 1025
