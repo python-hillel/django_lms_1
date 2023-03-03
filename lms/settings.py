@@ -76,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.get_params',
             ],
         },
     },
@@ -155,3 +156,6 @@ LOGIN_REDIRECT_URL = reverse_lazy('students:list')
 
 EMAIL_PORT = 1025
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'

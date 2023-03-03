@@ -7,7 +7,7 @@ Update profile
 {% endblock %}
 
 {% block content %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col-3"></div>

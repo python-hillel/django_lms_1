@@ -29,13 +29,6 @@ class ListStudentView(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.get_filter().form
 
-        params = self.request.GET
-        if 'page' in params:
-            params = copy(params)
-            del params['page']
-
-        context['params'] = f'&{params.urlencode()}' if params else ''
-
         return context
 
 

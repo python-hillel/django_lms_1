@@ -10,6 +10,10 @@ User profile
         <div class="row">
             <div class="col-3"></div>
             <div class="col">
+                <div class="img-circle.vert">
+                    <img class="rounded-circle p1 m1" width="200" height="200"
+                         src="{{ user.profile.avatar.url }}" alt="avatar">
+                </div>
                 <div class="p-3 m-3">
                     <h2 class="account-heading">{{ user.last_name }} {{ user.first_name }}</h2>
                     <p class="text-secondary">{{ user.email }}</p>
